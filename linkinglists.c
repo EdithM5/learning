@@ -11,11 +11,13 @@ struct Node
 void printlist(struct Node* head)
 {
 	struct Node* current = head;
+	printf("we start here.\n");
 	while (current != NULL)
 	{
 		printf("%d \n", current-> data);
 		current = current-> next;
 	}
+	printf("and end here.\n");
 }
 void insertatbeginning(struct Node** head2, int new_data)
 {
@@ -23,6 +25,29 @@ void insertatbeginning(struct Node** head2, int new_data)
 	newNode->data = new_data;
 	newNode-> next = *head2;
 	*head2 = newNode;
+}
+
+void deleteFirstNode(struct Node** head3)
+{
+	struct Node* temp = *head3;
+	*head3 = (*head3) -> next;
+	free(temp);
+}
+
+void reverselist(struct Node** head4)
+{
+	struct Node* prev = NULL;
+	struct Node* current = head4;
+	struct Node* next = NULL;
+
+	while (current != Null)
+	{
+		next = current -> next;
+		current-> next = prev;
+		prev = current;
+		current = next;
+	}
+	*head4 = prev;
 }
 
 int main()
@@ -51,7 +76,11 @@ int main()
 	
 	printlist(head);
 
-	insertatbeginning(*head, 7);
+	deleteFirstNode(&head);
+
+	printlist(head);
+
+	insertatbeginning(&head, 7);
 
 	printlist(head);
 	return 0;
