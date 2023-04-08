@@ -26,7 +26,8 @@ void insert(char* key, int value)
 	int index = hash(key) % TABLE_SIZE;
 
 	struct node* new_node = (struct node*)malloc(sizeof(struct node));
-	new_node -> key = key;
+	new_node -> key = (char*)malloc(strlen(key) + 1);
+	strcpy(new_node ->key, key);
 	new_node -> value = value;
 	new_node -> next = table[index];
 	table[index] = new_node;
@@ -41,8 +42,7 @@ int search(char* key)
 	
 	while (current != NULL)
 	{
-		if (strcmp(current-> key, key) == 0)
-			//compare keys
+		if (strcmp(current -> key, key) == 0)
 		{
 			return current -> value;
 			//return the value if the key is found
@@ -50,7 +50,7 @@ int search(char* key)
 		current = current -> next;
 		// move to the next node on the linked list
 	}
-	printf("key non-xistent\n");
+	printf("key non-existent\n");
 	return -1;
 	// if key is not found
 }
